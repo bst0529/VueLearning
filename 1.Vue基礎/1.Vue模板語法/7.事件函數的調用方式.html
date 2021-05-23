@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7.事件函數的調用方式</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        直接綁定函數名稱調用
+            <button v-on:click='handle'>點擊1</button>
+        調用函數的形式
+            <button v-on:click='handle()'>點擊1</button>
+    -->
+</head>
+<body>
+    <div id="app">
+        <div>{{num}}</div>
+        <button type="button" @click="handel">按鈕1</button>
+        <button type="button" @click="handel()">按鈕2</button>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                num:0,
+            },
+            methods:{
+                handel:function(){
+                    this.num++;
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/7.1.png" alt="">
+</body>
+</html>
+

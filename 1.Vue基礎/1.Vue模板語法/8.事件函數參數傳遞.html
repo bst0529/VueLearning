@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8.事件函數參數傳遞</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        1.通過默認的事件參數
+        2.通過$event 使用
+    -->
+</head>
+<body>
+    <div id="app">
+        <div>{{num}}</div>
+        <!-- 如果事件直接綁定函數名稱，那麼預設會傳遞事件物件作為事件函數的第一個參數 -->
+        <button type="button" @click="handel1">按鈕1</button>
+        <!-- 2、如果事件綁定函式呼叫，那麼事件物件必須作為最後一個參數顯示傳遞，並且事件物件的名稱必須是$event--> 
+        <button type="button" @click="handel2(123,456,$event)">按鈕2</button>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                num:0,
+            },
+            methods:{
+                handel1:function(event){
+                    this.num++;
+                    console.log(event.target.innerHTML);
+                },
+                handel2:function(p1,p2,event){
+                    this.num++;
+                    console.log(p1,p2);
+                    console.log(event.target.innerHTML);
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/8.1.png" alt="">
+    <img src="./images/8.2.png" alt="">
+    <hr>
+    <h2>點擊按鈕1</h2>
+    <img src="./images/8.3.png" alt="">
+    <h2>點擊按鈕2</h2>
+    <img src="./images/8.4.png" alt="">
+</body>
+</html>
+

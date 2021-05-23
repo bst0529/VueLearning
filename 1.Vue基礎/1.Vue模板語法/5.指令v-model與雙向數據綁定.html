@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.指令v-model與雙向數據綁定</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        什麼是雙向資料綁定
+            1.當資料發生變化的時候，視圖也就發生變化
+            2.當視圖發生變化的時候，資料也會跟著同步變化
+        雙向綁定的使用場景
+            1.v-model是一個指令，限制在 <input>、<select>、<textarea>、components（元件） 中使用
+        Vue中通過哪一個指令實現雙向綁定？
+            1.v-model
+    -->
+</head>
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <div><input type="text" v-model="msg"></div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"雙向數據綁定",
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/5.1.png" alt="">
+</body>
+</html>
+

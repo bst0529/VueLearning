@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11.自定義按鍵修飾符</title>
+    <script src="../../0.js/vue.js"></script>
+</head>
+<body>
+    <!-- 在Vue中可以通過 config.keyCodes 自訂按鍵修飾符別名 -->
+    <div id="app">
+        v-on:keyup.aaa="handleKeyCode"
+        <div style="margin-bottom: 20px;">
+            <input type="text" v-on:keyup.aaa="handleKeyCode" name="keycode_a"> {{code1}}
+        </div>
+        @keyup.66="handleKeyCode"
+        <div>
+            <input type="text" @keyup.66="handleKeyCode" name="keycode_b" > {{code2}}
+        </div>
+    </div>
+
+    <script>
+        Vue.config.keyCodes.aaa = 65
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                code1:"",
+                code2:""
+            },
+            methods:{
+                handleKeyCode:function(event){
+                    if (event.target.name=="keycode_a"){
+                        this.code1=event.keyCode;
+                        this.code2="";
+                    }else if (event.target.name=="keycode_b"){
+                        this.code1="";
+                        this.code2=event.keyCode;
+                    }
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/11.1.png" alt="">
+    <img src="./images/11.2.png" alt="">
+</body>
+</html>

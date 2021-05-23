@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9.事件修飾符</title>
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        #app > div:nth-child(n+2) {
+            border: 1px solid #333;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>{{num}}</div>
+        <div @click="handle0">
+            <button type="button">冒泡(num+1)</button>
+        </div>
+        <div @click="handle0">
+            <button type="button" @click="handel1">阻止冒泡(傳統)</button>
+        </div>
+        <div @click="handle0">
+            <button type="button" @click.stop>阻止冒泡(.stop)</button>
+        </div>
+        <hr>
+        <div>
+            <a href="https://www.google.com.tw">默認跳轉google</a>
+        </div>
+        <div>
+            <a href="https://www.google.com.tw" @click="handel2">阻止默認跳轉google(傳統)</a>
+        </div>
+        <div>
+            <a href="https://www.google.com.tw" @click.prevent>阻止默認跳轉google(.prevent)</a>
+        </div>
+        <div @click="handle0">
+            <a href="https://www.google.com.tw" @click.stop.prevent>既阻止冒泡又阻止默認行為().stop.prevent)</a>
+        </div>
+        <hr>
+        <!-- 添加事件監聽器時使用事件捕獲模式 -->
+        <!-- 即內部元素觸發的事件先在此處理，然後才交由內部元素進行處理 -->
+        <div @click.capture="handle3">
+            div @click.capture => 點擊 => num*5
+            <button type="button" @click="handle4">先處裡冒泡(num*5)，再處裡button點擊事件(num+200)</button>
+        </div>
+        <hr>
+        <!-- 只當在 event.target 是當前元素自身時觸發處理函數 -->
+        <!-- 即事件不是從內部元素觸發的 -->
+        <div @click.self="handel5" style="border: 1px solid #333;">
+            div @click.self => 點擊 => num+1000
+            <button type="button" @click="handle4">num+200</button>
+        </div>
+        <hr>
+        <!-- 點擊事件將只會觸發一次 -->
+        <button type="button" @click.once="handel6">num+50000(僅執行一次)</button>
+        <hr>
+        <h3>使用修飾符時，順序很重要；相應的代碼會以同樣的順序產生。。</h3>
+        <ul>
+            <li>用 v-on:click.prevent.self 會阻止所有的點擊</li>
+            <li>而 v-on:click.self.prevent 只會阻止對元素自身的點擊</li>
+        </ul>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                num:0,
+            },
+            methods:{
+                handle0:function(){
+                    this.num++;
+                },
+                handel1:function(event){
+                    event.stopPropagation();
+                },
+                handel2:function(event){
+                    event.preventDefault();
+                },
+                handle3:function(){
+                    this.num*=5;
+                },
+                handle4:function(){
+                    this.num+=200;
+                },
+                handel5:function(){
+                    this.num+=1000;
+                }
+                ,
+                handel6:function(){
+                    this.num+=50000;
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/9.1.png" alt="">
+    <img src="./images/9.2.png" alt="">
+    <img src="./images/9.3.png" alt="">
+    <img src="./images/9.4.png" alt="">
+    <img src="./images/9.5.png" alt="">
+</body>
+</html>

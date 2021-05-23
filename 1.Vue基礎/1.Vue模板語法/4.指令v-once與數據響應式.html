@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.指令v-once與數據響應式</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        什麼是資料回應式？
+            -當資料改變的時候頁面內容跟隨者改變
+        v-once 有什麼好處
+            -執行一次性的插值【當資料改變時，插值處的內容不會繼續更新】 
+    -->
+</head>
+<body>
+    <div id="app">
+        <div v-once>{{msg}}</div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"Hello Vue.js"
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/4.1.png" alt="">
+</body>
+</html>
+

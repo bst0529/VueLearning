@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.指令v-cloak</title>
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        /* 1、通過屬性選擇器 選擇到 帶有屬性 v-cloak的標籤  讓他隱藏 */
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            2、 讓帶有插值 語法的   添加 v-cloak 屬性 
+                在 資料渲染完場之後，v-cloak 屬性會被自動去除，
+                v-cloak一旦移除也就是沒有這個屬性了  屬性選擇器就選擇不到該標籤
+                也就是對應的標籤會變為可見 
+        -->
+
+        <div v-cloak>{{msg}}</div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"Hello Vue.js"
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/2.1.png" alt="">
+</body>
+</html>
+

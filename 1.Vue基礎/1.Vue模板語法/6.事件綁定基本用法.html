@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6.事件綁定基本用法</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        v-on 
+        用來綁定事件的 形式如：v-on:click 縮寫為 @click 
+    -->
+</head>
+<body>
+    <div id="app">
+        <div>{{num}}</div>
+        <button type="button" v-on:click="num++">按鈕1</button>
+        <button type="button" @click="num++">按鈕2</button>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                num:0,
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/6.1.png" alt="">
+</body>
+</html>
+

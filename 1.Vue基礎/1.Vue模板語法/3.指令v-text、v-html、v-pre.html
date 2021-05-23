@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.指令v-text、v-html、v-pre</title>
+    <script src="../../0.js/vue.js"></script>
+    <!--
+        
+    v-text
+    - v-text指令用於將資料填充到標籤中，作用於插值運算式類似，但是沒有閃動問題
+    - 如果資料中有HTML標籤會將html標籤一併輸出
+    - 注意：此處為單向綁定，資料物件上的值改變，插值會發生變化；但是當插值發生變化並不會影響資料物件的值
+
+    v-html
+    - 用法和v-text 相似  但是他可以將HTML片段填充到標籤中
+    - 可能有安全問題, 一般只在可信任內容上使用 `v-html`，**永不**用在使用者提交的內容上
+    - 它與v-text區別在於v-text輸出的是純文字，流覽器不會對其再進行html解析，但v-html會將其當html標籤解析後輸出。
+
+    v-pre
+    - 顯示原始資訊跳過編譯過程
+    - 跳過這個元素和它的子元素的編譯過程。
+    - 一些靜態的內容不需要編譯加這個指令可以加快渲染
+
+    -->
+    
+</head>
+<body>
+    <div id="app">
+        <div v-cloak>{{msg}}</div>
+        <div v-text="msg"></div>
+        <div v-html="msg"></div>
+        <div v-pre>{{msg}}</div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"<h1>數據綁定指令</h1>"
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/3.1.png" alt="">
+    <hr>
+    <h2>結果</h2>
+    <img src="./images/3.2.png" alt="">
+</body>
+</html>
+
