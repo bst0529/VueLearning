@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14.指令v-model底層原理分析</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        模擬v-model
+            第一種方案
+                1.通過 v-on監聽輸入框的輸入事件，將輸入的值通過事件處理函數存到data中
+                2.給輸入框通過v-bind綁定屬性value，把資料渲染到頁面上 
+            第二種方案
+                1.通過 v-on監聽輸入框的輸入事件，通過事件物件$event，拿到輸入的值﹐直接存儲到data中
+     -->
+</head>
+<body>
+    <div id="app">
+        <h3>第一種方案</h3>
+        <ul>
+            <li>通過 v-on監聽輸入框的輸入事件，將輸入的值通過事件處理函數存到data中</li>
+            <li>給輸入框通過v-bind綁定屬性value，把資料渲染到頁面上 </li>
+        </ul>
+        {{msg}}
+        <div>
+            <input type="text" v-bind:value="msg" v-on:input="handle">
+        </div>
+        <h3>第二種方案</h3>
+        <ul>
+            <li>通過 v-on監聽輸入框的輸入事件，通過事件物件$event，拿到輸入的值﹐直接存儲到data中</li>
+        </ul>
+        {{msg}}
+        <div>
+            <input type="text" v-bind:value="msg" v-on:input="msg=$event.target.value">
+        </div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"Hellow",
+            },
+            methods:{
+                handle:function(event){
+                    this.msg=event.target.value;
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/14.1.png" alt="">
+    <img src="./images/14.2.png" alt="">
+    <img src="./images/14.3.png" alt="">
+</body>
+</html>

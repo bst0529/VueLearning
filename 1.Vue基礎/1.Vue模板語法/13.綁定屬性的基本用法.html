@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13.綁定屬性的基本用法</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        vue 中怎麼操作屬性
+            - v-bind 指令被用來回應地更新 HTML 屬性 
+            - v-bind:href 可以縮寫為 :href
+        v-bind 和 v-on的區別
+            - v-bind 綁定屬性
+            - v-on 綁定事件   
+    -->
+</head>
+<body>
+    <div id="app">
+        <a v-bind:href="url1">Google</a>
+        <a :href="url2">PCHome</a>
+        <button type="button" @click="handle">切換</button>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                url1:"https://www.google.com.tw",
+                url2:"https://www.pchome.com.tw",
+            },
+            methods:{
+                handle:function(event){
+                    this.url1="https://yahoo.com.tw";
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/13.1.png" alt="">
+    <img src="./images/13.2.png" alt="">
+</body>
+</html>

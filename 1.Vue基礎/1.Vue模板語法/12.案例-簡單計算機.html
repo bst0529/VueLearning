@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12.案例-簡單計算機</title>
+    <script src="../../0.js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <span>數值1：</span>
+            <input type="text" v-model="a">
+        </div>
+        <div>
+            <span>數值2：</span>
+            <input type="text" v-model="b">
+        </div>
+        <div>
+            <button type="button" @click="handle">加總</button>
+        </div>
+        <div>
+            <span>加總結果：{{result}}</span>
+        </div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                a:"",
+                b:"",
+                result:""
+            },
+            methods:{
+                handle:function(){
+                    this.result=parseInt(this.a)+parseInt(this.b);
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/12.1.png" alt="">
+    <img src="./images/12.2.png" alt="">
+</body>
+</html>
