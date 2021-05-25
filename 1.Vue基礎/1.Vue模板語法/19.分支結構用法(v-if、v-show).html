@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19.分支結構用法(v-if、v-show)</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        v-if 使用場景
+            多個元素通過條件判斷展示或者隱藏某個元素，或者多個元素
+         v-show和v-if 區別
+            1.v-show本質就是標籤display設置為none，控制隱藏
+            2.v-if是動態的向DOM樹內添加或者刪除DOM元素 
+    -->
+    <style>
+        h3 {
+            background: #000;
+            padding: 5px 10px;
+            color: #fff;
+            width: 300px;
+        }
+        li {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <h3>v-if</h3>
+            <ul>
+                <li>v-if="scope>=90"</li>
+                <li>v-else-if="scope>=75 && scope<90"</li>
+                <li>v-else-if="scope>=60 && scope<75"</li>
+                <li>v-else</li>
+            </ul>
+            分數：{{scope}} ==> 
+            <span v-if="scope>=90">優秀</span>
+            <span v-else-if="scope>=75 && scope<90">良好</span>
+            <span v-else-if="scope>=60 && scope<75">一般</span>
+            <span v-else>不及格</span>
+        </div>
+        <button type="button" value="95" v-on:click="handle">分數改為95</button>
+        <button type="button" value="80" v-on:click="handle">分數改為80</button>
+        <button type="button" value="65" v-on:click="handle">分數改為65</button>
+        <button type="button" value="59" v-on:click="handle">分數改為59</button>
+
+        <h3>v-show</h3>
+        <ul>
+            <li>v-show="flag"</li>
+        </ul>
+        <div v-show="flag">測試用文字</div>
+        <button type="button" v-on:click="handle2">顯示或隱藏測試用文字</button>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                scope:90,
+                flag:true
+            },
+            methods:{
+                handle:function(event){
+                    this.scope=event.target.value;
+                },
+                handle2:function(){
+                    this.flag=!this.flag;
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/19.1.png" alt="">
+    <img src="./images/19.2.png" alt="">
+    <img src="./images/19.3.png" alt="">
+</body>
+</html>

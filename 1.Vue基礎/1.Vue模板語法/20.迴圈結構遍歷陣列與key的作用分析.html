@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20.迴圈結構遍歷陣列與key的作用分析</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        *vue中迴圈是哪一個指令？
+            1.v-for = “(item,index) in 陣列名稱”
+            2.Item代表陣列中的每一項，index代表索引
+        *key的作用 
+            1.key來給每個節點做一個唯一標識
+            2.key的作用主要是為了高效的更新虛擬DOM
+    -->
+    <style>
+        h3 {
+            background: #000;
+            padding: 5px 10px;
+            color: #fff;
+            width: 400px;
+        }
+        p {
+            padding-left: 10px;
+            font-size: 20px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="app">
+        <div>
+            <h3>v-for遍歷矩陣 簡單結構</h3>
+            <p>v-for="item in fruit" <span>(不推薦)</span></p>
+            <p>:key="index" v-for="(item,index) in fruit"</p>
+            <ul>
+                <li :key="index" v-for="(item,index) in fruit">{{item}}---{{index}}</li>
+            </ul>
+        </div>
+        <div>
+            <h3>v-for遍歷矩陣 複雜結構</h3>
+            <p>:key="item.sn" v-for="item in myFruit"</p>
+            <p>:key="item.sn" v-for="(item,index) in myFruit"</p>
+            <p>:key="index" v-for="(item,index) in myFruit"</p>
+            <ul>
+                <li :key="item.sn" v-for="item in myFruit">{{item.ename}}---{{item.cname}}---{{item.sn}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                fruit:["apple","orange","banana"],
+                myFruit:[
+                    {
+                        sn:11,
+                        ename:"apple",
+                        cname:"蘋果"
+                    },
+                    {
+                        sn:22,
+                        ename:"orange",
+                        cname:"橘子"
+                    },
+                    {
+                        sn:33,
+                        ename:"banana",
+                        cname:"香蕉"
+                    }
+                ]
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/20.1.png" alt="">
+    <img src="./images/20.2.png" alt="">
+    <img src="./images/20.3.png" alt="">
+</body>
+</html>

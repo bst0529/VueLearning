@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21.迴圈結構遍歷物件</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        怎麼遍歷對象
+            1.v-for = “(item,key,index) in 對象名”
+            2.Item代表物件中的每一項
+            3.Key代表對應的鍵名 
+            4.Index代表對應的索引
+         v-if和v-for搭配使用 
+            當v-if與v-for一起使用時，v-for具有比v-if更高的優先順序。 
+    -->
+    <style>
+        h3 {
+            background: #000;
+            padding: 5px 10px;
+            color: #fff;
+            width: 400px;
+        }
+        p {
+            padding-left: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>v-for遍歷對象</h3>
+        <p>v-for="(item,key,index) in obj"</p>
+        <div v-for="(item,key,index) in obj">{{item}}---{{key}}---{{index}}</div>
+
+        <h3>v-if與v-for一起使用</h3>
+        <p>v-if="item==15" v-for="(item,key,index) in obj"</p>
+        <div v-if="item==15" v-for="(item,key,index) in obj">{{item}}---{{key}}---{{index}}</div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                obj:{
+                    name:"Robert",
+                    age:15,
+                    gender:"male"
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/21.1.png" alt="">
+    <img src="./images/21.2.png" alt="">
+    <img src="./images/21.3.png" alt="">
+</body>
+</html>
