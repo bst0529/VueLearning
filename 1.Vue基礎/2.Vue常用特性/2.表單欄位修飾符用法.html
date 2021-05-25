@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.表單欄位修飾符用法</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        表單欄位修飾符有哪些
+            (1).trim，自動過濾使用者輸入的首尾空白字元，只能去掉首尾的，不能去除中間的空格。
+            (2).lazy，將input事件切換成change事件.lazy修飾符延遲了同步更新屬性值的時機。
+                即將原本綁定在input事件的同步邏輯轉變為綁定在change事件上(在失去焦點或者按下回車鍵時才更新)。	
+            (3).number，轉換為數值 
+                1.注意點：當開始輸入非數位的字串時，因為Vue無法將字串轉換成數值 
+                2.所以屬性值將即時更新成相同的字串。即使後面輸入數位，也將被視作字串。 
+    -->
+    <style>
+        h3 {
+            width: 150px;
+            padding: 5px 10px;
+            background: #333;
+            color: #fff;
+        }
+        p {
+            padding-left: 10px;
+            font-size: 20px;
+        }
+        .mt-1 {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>.trim</h3>
+        <p>v-model="trimText1"</p>
+        <input type="text" v-model="trimText1">字數長度：{{trimText1.length}}
+        <p>v-model.trim="trimText2"</p>
+        <input type="text" v-model.trim="trimText2">字數長度：{{trimText2.length}}
+
+        <h3>.lazy</h3>
+        <p>v-model="lazyText1"</p>
+        <input type="text" v-model="lazyText1">{{lazyText1}}
+        <p>v-model.lazy="lazyText2"</p>
+        <input type="text" v-model.lazy="lazyText2">{{lazyText2}}
+
+        <h3>.number</h3>
+        <input type="text" v-model="numberText1">+12
+        <button type="button" @click="handle2">加總</button>={{numberSum1}}<br>
+        <input type="text" v-model.number="numberText2">+12
+        <button type="button" @click="handle3">加總</button>={{numberSum2}}
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                trimText1:"",
+                trimText2:"",
+                lazyText1:"",
+                lazyText2:"",
+                numberText1:"",
+                numberText2:"",
+                numberSum1:0,
+                numberSum2:0,
+            },
+            methods:{
+                handle:function(){
+                    console.log("trim1："+this.trimText1)
+                    console.log("trim2："+this.trimText2)
+                },
+                handle2:function(){
+                    this.numberSum1 = this.numberText1+12;
+                },
+                handle3:function(){
+                    this.numberSum2 = this.numberText2+12;
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/2.1.png" alt="">
+    <img src="./images/2.2.png" alt="">
+    <img src="./images/2.3.png" alt="">
+</body>
+</html>

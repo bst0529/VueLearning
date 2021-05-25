@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.表單基本操作</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        常見的表單元素有哪些
+            1.輸入框
+            2.核取方塊
+            3.文本域
+            4.下拉清單 
+
+        單選框如何實現單選？
+            1.兩個單選框需要同時通過v-model雙向綁定一個值 
+            2.每一個單選框必須要有value屬性且value值不能一樣
+            3.當某一個單選框選中的時候，v-model會將當前的value值，改變data中的資料
+        核取方塊如何實現複選
+            1.核取方塊需要同時通過v-model雙向綁定一個值 
+            2.每一個核取方塊必須要有value屬性且value值不能一樣 
+            3.當某一個單選框選中的時候v-model，會將當前的value值，改變data中的資料
+
+        如何實現獲取下拉清單的選中狀態
+            1.需要給select通過v-model雙向綁定一個值 
+            2.每一個option必須要有value屬性且value值不能一樣 
+            3.當某一個option選中的時候v-model，會將當前的value值，改變data中的資料
+        如何獲取文本域中的值
+            1.通過v-model 綁定一個值
+    -->
+    <style>
+        form > div {
+            margin-bottom: 10px;
+        }
+        span {
+            display: inline-block;
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form action="https:///www.google.com.tw">
+            <div>
+                <span>姓名：</span>
+                <input type="text" v-model="uname">
+            </div>
+            <div>
+                <span>性別：</span>
+                <input type="radio" id="gender1" value="1" v-model="gender">
+                <label for="gender1">男</label>
+                <input type="radio" id="gender2" value="2" v-model="gender">
+                <label for="gender2">女</label>
+            </div>
+            <div>
+                <span>愛好：</span>
+                <input type="checkbox" id="baseball" value="1" v-model="hobby">
+                <label for="baseketball">籃球</label>
+                <input type="checkbox" id="sing" value="2" v-model="hobby">
+                <label for="sing">唱歌</label>
+                <input type="checkbox" id="coding" value="3" v-model="hobby">
+                <label for="coding">寫代碼</label>
+            </div>
+            <div>
+                <span>職業：</span>
+                <select v-model="occupation">
+                    <option value="0">請選擇</option>
+                    <option value="1">老師</option>
+                    <option value="2">醫師</option>
+                    <option value="3">會計師</option>
+                    <option value="4">機師</option>
+                </select>
+            </div>
+            <div>
+                <span>副職業：</span>
+                <select v-model="subOccupation" multiple="true">
+                    <option value="1">少爺</option>
+                    <option value="2">酒女</option>
+                    <option value="3">代駕</option>
+                    <option value="4">車夫</option>
+                </select>
+            </div>
+            <div>
+                <span>個人簡介：</span>
+                <textarea v-model="discription"></textarea>
+            </div>
+            <button type="submit" @click.prevent="handle">提出</button>
+        </form>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                uname:"abc",
+                gender:"2",
+                hobby:[1,2],
+                occupation:1,
+                subOccupation:[2,3],
+                discription:"小學畢業"
+            },
+            methods:{
+                handle:function(){
+                    console.log("uname："+this.uname);
+                    console.log("gender："+this.gender);
+                    console.log("hobby："+this.hobby);
+                    console.log("occupation："+this.occupation);
+                    console.log("subOccupation："+this.subOccupation);
+                    console.log("discription："+this.discription);
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/1.1.png" alt="">
+    <img src="./images/1.2.png" alt="">
+    <img src="./images/1.3.png" alt="">
+    <img src="./images/1.4.png" alt="">
+    <img src="./images/1.5.png" alt="">
+</body>
+</html>
