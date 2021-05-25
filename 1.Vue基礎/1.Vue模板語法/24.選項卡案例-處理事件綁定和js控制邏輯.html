@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24.選項卡案例-處理事件綁定和js控制邏輯</title>
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        ul,li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        li {
+            float: left;
+            width: 150px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+        .clearFix::after {
+            content: "";
+            display: block;
+            visibility: hidden;
+            height: 0;
+            line-height: 0;
+            clear: both;
+        }
+        img {
+            vertical-align: top;
+        }
+        li.active {
+            background-color: orange;
+        }
+        div > div {
+            display: none;
+        }
+        div.current {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul class="clearFix">
+            <li :class="currentIndex==index?'active':''" :key="index" v-for="(item,index) in fruit" @click="handle(index)">{{item.title}}</li>
+        </ul>
+        <div :class="currentIndex==index?'current':''" :key="index" v-for="(item,index) in fruit">
+            <img :src="item.path" alt="">
+        </div>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                currentIndex:0,
+                fruit:[{
+                    id:1,
+                    title:"apple",
+                    path:"./img/apple.png"
+                },
+                {
+                    id:2,
+                    title:"orange",
+                    path:"./img/orange.png"
+                },
+                {
+                    id:3,
+                    title:"lemon",
+                    path:"./img/lemon.png"
+                }]
+            },
+            methods:{
+                handle:function(index){
+                    this.currentIndex=index;
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/24.1.png" alt="">
+    <img src="./images/24.2.png" alt="">
+</body>
+</html>

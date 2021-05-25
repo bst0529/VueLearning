@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>22.選項卡案例-實現靜態UI效果</title>
+    <style>
+        ul,li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        li {
+            float: left;
+            width: 150px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border: 1px solid #333;
+            cursor: pointer;
+        }
+        .clearFix::after {
+            content: "";
+            display: block;
+            visibility: hidden;
+            height: 0;
+            line-height: 0;
+            clear: both;
+        }
+        img {
+            vertical-align: top;
+        }
+        li.active {
+            background-color: orange;
+        }
+        div {
+            display: none;
+        }
+        div.current {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <ul class="clearFix">
+        <li class="active">apple</li>
+        <li>orange</li>
+        <li>lemon</li>
+    </ul>
+    <div class="current">
+        <img src="./img/apple.png" alt="">
+    </div>
+    <div>
+        <img src="./img/orange.png" alt="">
+    </div>
+    <div>
+        <img src="./img/lemon.png" alt="">
+    </div>
+
+    <hr>
+    <img src="./images/22.1.png" alt="">
+    <img src="./images/22.2.png" alt="">
+</body>
+</html>
