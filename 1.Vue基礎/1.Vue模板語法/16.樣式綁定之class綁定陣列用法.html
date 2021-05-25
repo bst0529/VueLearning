@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16.樣式綁定之class綁定陣列用法</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        如何綁定一個陣列
+            1.通過v-bind:class=[值1，值2]
+            2.值1、值2對應data中的資料 
+     -->
+     <style>
+        .active {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #333;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-bind:class="[activeClass,errorClass]">測試樣式的文字</div>
+        <button type="button" v-on:click="handle1">不顯示邊框</button>
+        <button type="button" v-on:click="handle2">文字去除紅色</button>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                activeClass:"active",
+                errorClass:"error"
+            },
+            methods:{
+                handle1:function(){
+                    this.activeClass="";
+                },
+                handle2:function(){
+                    this.errorClass="";
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/16.1.png" alt="">
+    <img src="./images/16.2.png" alt="">
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18.樣式綁定之style綁定用法</title>
+    <script src="../../0.js/vue.js"></script>
+        <!-- 
+            綁定style可以使用陣列和物件嗎?
+                1.v-bind:style = [值1，值2]
+                    陣列中的值1和值2中存儲的是一個物件，這個物件裡面存儲的css屬性和屬性值
+                2.v-bind:style = { 鍵：值}
+                    鍵，代表CSS的屬性值，存貯的是CSS屬性值 
+         -->
+    <style>
+        h3 {
+            background: #000;
+            padding: 5px 10px;
+            color: #fff;
+            width: 300px;
+        }
+        p {
+            padding-left: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>對象語法</h3>
+        <p>v-bind:style="{border:borderStyle,color:colorStyle,width:widthStyle,height:heightStyle,background:backgroundStyle}"</p>
+        <div v-bind:style="{border:borderStyle,color:colorStyle,width:widthStyle,height:heightStyle,background:backgroundStyle}">測試樣式的文字</div>
+
+        <h3>對象語法(簡化)</h3>
+        <p>v-bind:style="objStyles"</p>
+        <div v-bind:style="objStyles">測試樣式的文字</div>
+
+        <h3>陣列語法</h3>
+        <p>v-bind:style="[objStyles,overideStyles]"</p>
+        <div v-bind:style="[objStyles,overideStyles]">測試樣式的文字</div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                borderStyle:"1px solid #333",
+                colorStyle:"red",
+                widthStyle:"200px",
+                heightStyle:"100px",
+                backgroundStyle:"yellowgreen",
+                objStyles:{
+                    border:"1px solid #333",
+                    color:"red",
+                    width:"200px",
+                    height:"100px",
+                    background:"yellowgreen"
+                },
+                overideStyles:{
+                    background:"pink",
+                    width:"300px",
+                    height:"200px"
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/18.1.png" alt="">
+    <img src="./images/18.2.png" alt="">
+    <img src="./images/18.3.png" alt="">
+</body>
+</html>

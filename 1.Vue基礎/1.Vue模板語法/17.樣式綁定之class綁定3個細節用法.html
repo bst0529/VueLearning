@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17.樣式綁定之class綁定3個細節用法</title>
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        *物件綁定和陣列綁定可以混用嗎？
+            1.陣列中可以存儲任何資料類型    
+            2.物件的值中也可以存儲任何資料類型
+        *綁定陣列和綁定物件有什麼區別
+            1.綁定物件的時候物件的屬性，即要渲染的類名，物件的屬性值對應的是data中的資料
+            2.綁定陣列的時候陣列裡面存的值是data中的資料 
+        *class綁定的值可以簡化處裡
+        *默認的class會被保留
+    -->
+    <style>
+        h3 {
+            background: #000;
+            padding: 5px 10px;
+            color: #fff;
+            width: 300px;
+        }
+        p {
+            padding-left: 10px;
+            font-size: 20px;
+        }
+        .active {
+            width: 300px;
+            height: 100px;
+            border: 1px solid #333;
+        }
+        .error {
+            color: red;
+        }
+        .base {
+            font-size: 30px;
+        }
+        .bg {
+            background: yellowgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>物件綁定和陣列綁定混用</h3>
+        <p>v-bind:class="[activeClass,errorClass,{base:isBase}]"</p>
+        <div v-bind:class="[activeClass,errorClass,{base:isBase}]">測試樣式的文字</div>
+        <button type="button" v-on:click="handle1">去除邊框</button>
+        <button type="button" v-on:click="handle2">文字大小是否變回預設</button>
+
+        <h3>class綁定的值可以簡化處裡(陣列)</h3>
+        <p>v-bind:class="arrClasses"</p>
+        <div v-bind:class="arrClasses">測試樣式的文字</div>
+        <button type="button" v-on:click="handle3">去除邊框</button>
+        <button type="button" v-on:click="handle4">文字大小變回預設</button>
+
+        <h3>class綁定的值可以簡化處裡(物件)</h3>
+        <p>v-bind:class="objClasses"</p>
+        <div v-bind:class="objClasses">測試樣式的文字</div>
+        <button type="button" v-on:click="handle5">是否去除邊框</button>
+        <button type="button" v-on:click="handle6">文字大小是否變回預設</button>
+
+        <h3>默認的class會被保留</h3>
+        <p>class="bg" v-bind:class="objClasses"</p>
+        <div class="bg" v-bind:class="objClasses">測試樣式的文字</div>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                activeClass:"active",
+                errorClass:"error",
+                isBase:true,
+                arrClasses:["active","error","base"],
+                objClasses:{
+                    active:true,
+                    error:true,
+                    base:true
+                }
+            },
+            methods:{
+                handle1:function(){
+                    this.activeClass="";
+                },
+                handle2:function(){
+                    this.isBase=!this.isBase;
+                },
+                handle3:function(){
+                    var index=this.arrClasses.findIndex(x=>x=="active");
+                    if (index != -1)
+                        this.arrClasses.splice(index,1);
+                },
+                handle4:function(){
+                    var index=this.arrClasses.findIndex(x=>x=="base");
+                    if (index != -1)
+                        this.arrClasses.splice(index,1);
+                },
+                handle5:function(){
+                    this.objClasses.active=!this.objClasses.active
+                },
+                handle6:function(){
+                    this.objClasses.base=!this.objClasses.base;
+                },
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/17.1.png" alt="">
+    <img src="./images/17.2.png" alt="">
+    <img src="./images/17.3.png" alt="">
+    <img src="./images/17.4.png" alt="">
+</body>
+</html>
