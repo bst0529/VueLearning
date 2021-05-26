@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.自訂義指令-局部</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h3>自定義指令-局部-修改背景顏色</h3>
+        <p>v-color="color"</p>
+        <input type="text" v-color="color" v-model="color">
+        <br>
+        <h3>自定義指令-局部-獲取焦點</h3>
+        <p>v-focus</p>
+        <input type="text" v-focus>
+    </div>
+
+    <script>
+        Vue.directive("color",{
+            inserted: function(el,binding){
+                el.style.background=binding.value;
+            }
+        });
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                color:"skyblue",
+            },
+            directives:{
+                color:{
+                    bind:function(el,binding){
+                        console.log(binding.value);
+                        el.style.background=binding.value;
+                    }
+                },
+                focus:{
+                    inserted:function(el){
+                        el.focus();
+                    }
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/5.1.png" alt="">
+    <img src="./images/5.2.png" alt="">
+</body>
+</html>

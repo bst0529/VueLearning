@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.自訂義指令基本用法</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        如何自訂指令
+           1.Vue.directive註冊全域指令
+           2.directives定義局部指令
+           3.注意：局部指令有s  
+    -->
+</head>
+<body>
+    <div id="app">
+        <h3>自定義指令-全局-獲取元素焦點</h3>
+        <p>v-focus</p>
+        <input type="text" v-focus>
+    </div>
+
+    <script>
+        Vue.directive('focus',{
+            inserted: function(el) {
+                el.focus();
+             }
+        });
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/3.1.png" alt="">
+</body>
+</html>

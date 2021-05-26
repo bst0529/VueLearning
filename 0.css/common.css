@@ -1,0 +1,13 @@
+h3 {
+    display: inline-block;
+    padding: 5px 10px;
+    background: #333;
+    color: #fff;
+}
+p {
+    padding-left: 10px;
+    font-size: 20px;
+}
+.mt-1 {
+    margin-top: 10px;
+}
