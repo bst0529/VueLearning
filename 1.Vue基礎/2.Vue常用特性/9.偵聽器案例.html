@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9.偵聽器案例</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        偵聽器案例實現思路
+            1.採用偵聽器來監測用戶名變化
+            2.調用後臺介面進行驗證
+            3.根據驗證的結果調整提示資訊 
+    -->
+</head>
+<body>
+    <div id="app">
+        <div>
+            <span>用戶名稱：</span>
+            <input type="text" v-model.lazy="uname">
+            <span v-html="tip"></span>
+        </div>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                uname:"",
+                tip:""
+            },
+            methods:{
+                checkuname:function(uname){
+                    var that=this;
+                    setTimeout(function(){
+                        if (uname=="admin"){
+                            that.tip="<span style='color:red;'>用戶名稱已經被使用</span>";
+                        }else{
+                            that.tip="<span style='color:green;'>用戶名稱可以使用</span>";
+                        }
+                    },2000)
+                }
+            },
+            watch:{
+                uname:function(val){
+                    this.checkuname(val);
+                    this.tip="用戶名稱檢查中...";
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/9.1.png" alt="">
+    <img src="./images/9.2.png" alt="">
+    <img src="./images/9.3.png" alt="">
+</body>
+</html>

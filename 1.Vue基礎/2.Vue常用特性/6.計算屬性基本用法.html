@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6.計算屬性基本用法</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        計算屬性 computed
+            1.模板中放入太多的邏輯會讓模板過重且難以維護 使用計算屬性可以讓模板更加的簡潔 
+            2.計算屬性是基於它們的回應式依賴進行緩存的
+            3.computed比較適合對多個變數或者物件進行處理後返回一個結果值，
+              也就是數多個變數中的某一個值發生了變 化則我們監控的這個值也就會發生變化 
+
+        計算屬性的使用場景
+            1.模板中放入太多的邏輯會讓模板過重且難以維護 使用計算屬性可以讓模板更加的簡潔 
+        computed中定義的屬性可以自訂嗎？
+            1.可以
+        定義好的計算屬性如何調用
+            1.在插值語法中，直接寫自訂的屬性名
+            2.在方法中，直接this.自訂的屬性名()
+    -->
+</head>
+<body>
+    <div id="app">
+        <h3>計算屬性 computed</h3>
+        <div>原始字串：{{msg}}</div>
+        <div>反轉後字串：{{reverseMsg}}</div>
+    </div>
+    <script>
+    var vm=new Vue({
+        el:"#app",
+        data:{
+            msg:"skyblue",
+        },
+        computed:{
+            reverseMsg:function(){
+                return this.msg.split('').reverse().join('');
+            }
+        }
+    });
+    </script>
+    
+    <hr>
+    <img src="./images/6.1.png" alt="">
+    <img src="./images/6.2.png" alt="">
+</body>
+</html>

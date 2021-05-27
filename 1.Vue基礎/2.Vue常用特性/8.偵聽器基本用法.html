@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8.偵聽器基本用法</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        偵聽器的使用場景
+            1.一般用於非同步或者開銷較大的操作
+        偵聽器中定義的屬性有什麼要求
+            1.watch中的屬性，一定是data中已經存在的資料
+            2.Watch中的屬性不能自訂 
+    -->
+</head>
+<body>
+    <div id="app">
+        <h3>偵聽器</h3>
+        <div><span>FirstName：</span>{{FirstName}}</div>
+        <div><span>LastName：</span>{{LastName}}</div>
+        <div><span>FullName：</span>{{FullName}}</div>
+
+        <h3>此案例計算屬性也可做到</h3>
+        <div><span>FullName：</span>{{getFullName}}</div>
+
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                FirstName:"Tom",
+                LastName:"Smith",
+                FullName:"Tom Smith"
+            },
+            watch:{
+                FirstName:function(val){
+                    this.FullName=val+" "+this.LastName;
+                },
+                LastName:function(val){
+                    this.FullName=this.FirstName+" "+val;
+                }
+            },
+            computed:{
+                getFullName:function(){
+                    return this.FirstName+" "+this.LastName;
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/8.1.png" alt="">
+    <img src="./images/8.2.png" alt="">
+</body>
+</html>

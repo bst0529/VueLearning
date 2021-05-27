@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7.計算屬性與方法的區別</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        計算屬性與方法的區別 
+            1.計算屬性是基於它們的依賴進行緩存的 
+            2.方法不存在緩 
+    -->
+</head>
+<body>
+    <div id="app">
+        <h3>計算屬性與方法的區別</h3>
+        <p>計算屬性</p>
+        <div>原始字串：{{msg}}</div>
+        <div>計算屬性反轉後字串-呼叫第一次：{{reverseMsg}}</div>
+        <div>計算屬性反轉後字串-呼叫第二次：{{reverseMsg}}</div>
+        <p>方法</p>
+        <div>原始字串：{{msg2}}</div>
+        <div>方法反轉後字串-呼叫第一次：{{reverseString()}}</div>
+        <div>方法反轉後字串-呼叫第二次：{{reverseString()}}</div>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"skyblue",
+                msg2:"yellowgreen"
+            },
+            methods:{
+                reverseString:function(){
+                    console.log("reverseMsgByMethod");
+                    return this.msg.split('').reverse().join('');
+                }
+            },
+            computed:{
+                reverseMsg:function(){
+                    console.log("reverseMsgByComputed");
+                    return this.msg.split('').reverse().join('');
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/7.1.png" alt="">
+    <img src="./images/7.2.png" alt="">
+    <img src="./images/7.3.png" alt="">
+</body>
+</html>
