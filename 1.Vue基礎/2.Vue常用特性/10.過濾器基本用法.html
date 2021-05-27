@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10.過濾器基本用法</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        如何定義一個過濾器
+            1.Vue.filter或者filters
+        過濾器中的第一個參數代表什麼
+            第一個參數表示管道符前面的資料
+        如何定義全域和局部過濾器
+            1.Vue.filter---全域
+            2.Filters---局部 
+
+        * Vue.js允許自訂過濾器，可被用於一些常見的文本格式化。 
+        * 過濾器可以用在兩個地方：雙花括弧插值和v-bind運算式。
+        * 過濾器應該被添加在JavaScript運算式的尾部，由“管道”符號指示。
+        * 支持級聯操作，過濾器不改變真正的data，而只是改變渲染的結果，並返回過濾後的版本 
+        * 全域註冊時是filter，沒有s的。而局部過濾器是filters，是有s的
+    -->
+</head>
+<body>
+    <div id="app">
+        <h3>全域過濾器</h3>
+        <div>
+            <input type="text" v-model="msg">
+        </div>
+
+        <p v-pre>{{msg | upperFisrt}}</p>
+        <span>首字母大寫：{{msg | upperFisrt}}</span>
+        
+        <p v-pre>{{msg | lowerFisrt}}</p>
+        <span>首字母小寫：{{msg | lowerFisrt}}</span>
+
+        <p v-pre>{{msg | upperFisrt | lowerFisrt}}</p>
+        <span>首字母大寫再首字母小寫：{{msg | upperFisrt | lowerFisrt}}</span><br>
+
+        <h3>局部過濾器</h3>
+        <div>
+            <input type="text" v-model="msg2">
+        </div>
+
+        <p v-pre>{{msg2 | upperAll}}</p>
+        <span>字母全大寫：{{msg2 | upperAll}}</span>
+        
+        <p v-pre>{{msg | lowerAll}}</p>
+        <span>首字母小寫：{{msg2 | lowerAll}}</span>
+
+        <p v-pre>{{msg2 | upperAll | lowerAll}}</p>
+        <span>字母全大寫再字母全小寫：{{msg2 | upperAll | lowerAll}}</span>
+    </div>
+    <script>
+        Vue.filter("upperFisrt",function(val){
+            return val.charAt(0).toUpperCase()+val.slice(1)
+        });
+        Vue.filter("lowerFisrt",function(val){
+            return val.charAt(0).toLowerCase()+val.slice(1)
+        });
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"",
+                msg2:""
+            },
+            filters:{
+                upperAll:function(val){
+                    return val.toUpperCase();
+                },
+                lowerAll:function(val){
+                    return val.toLowerCase();
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/10.1.png" alt="">
+    <img src="./images/10.2.png" alt="">
+    <img src="./images/10.3.png" alt="">
+</body>
+</html>

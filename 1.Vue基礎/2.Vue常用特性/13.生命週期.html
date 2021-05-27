@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>13.生命週期</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        img {
+            display: block;
+        }
+    </style>
+    <!-- 
+        生命週期 
+            1.事物從出生到死亡的過程 
+            2.Vue實例從創建到銷毀的過程，這些過程中會伴隨著一些函數的自調用，我們稱這些函數為鉤子函數。
+        
+        1. 主要階段
+            掛載（初始化相關屬性）
+                ① beforeCreate 
+                ② created 
+                ③ beforeMount 
+                ④ mounted 
+            更新（元素或元件的變更操作）
+                ① beforeUpdate 
+                ② updated
+            銷毀（銷毀相關屬性） 
+            ① beforeDestroy 
+            ② destroyed
+
+        2. Vue實例的產生過程
+            ① beforeCreate 在實例初始化之後，資料觀測和事件配置之前被調用。 
+            ② created 在實例創建完成後被立即調用。 
+            ③ beforeMount 在掛載開始之前被調用。 
+            ④ mounted el被新創建的vm.$el替換，並掛載到實例上去之後調用該鉤子。 
+            ⑤ beforeUpdate 資料更新時調用，發生在虛擬DOM打補丁之前。 
+            ⑥ updated 由於資料更改導致的虛擬DOM重新渲染和打補丁，在這之後會調用該鉤子。 
+            ⑦ beforeDestroy 實例銷毀之前調用。
+            ⑧ destroyed 實例銷毀後調用
+    -->
+
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <button type="button" @click="update">update</button>
+        <button type="button" @click="destory">destory</button>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                msg:"生命週期"
+            },
+            methods:{
+                update:function(){
+                    this.msg="生命週期已被更新"
+                },
+                destory:function(){
+                    this.$destroy();
+                }
+            },
+            beforeCreate:function(){
+                console.log("beforeCreate");
+            },
+            created:function(){
+                console.log("created");
+            },
+            beforeMount:function(){
+                console.log("beforeMount");
+            },
+            mounted:function(){
+                console.log("mounted");
+            },
+            beforeUpdate:function(){
+                console.log("beforeUpdate");
+            },
+            updated:function(){
+                console.log("updated");
+            },
+            beforeDestroy:function(){
+                console.log("beforeDestroy");
+            },
+            destroyed:function(){
+                console.log("destroyed");
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/13.1.png" alt="">
+    <img src="./images/13.2.png" alt="">
+    <img src="./images/13.3.png" alt="">
+    <img src="./images/13.4.png" alt="">
+    <img src="./images/13.5.png" alt="">
+    <img src="./images/13.6.png" alt="">
+    <img src="./images/13.7.png" alt="">
+</body>
+</html>

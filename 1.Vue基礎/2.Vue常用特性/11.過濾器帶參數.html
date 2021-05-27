@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11.過濾器帶參數</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        過濾器中的參數怎麼使用
+            1.{{ message | filterA('arg1', 'arg2') }}
+            2.Vue.filter(‘filterA’,function(n,a,b){}）
+            3.在過濾器中，第一個參數對應的是管道符前面的資料n，此時對應message
+            4.第2個參數a對應實參arg1字串
+            5.第3個參數b對應實參arg2字串 
+    -->
+</head>
+<body>
+    <div id="app">
+        <h3>格式化預設日期</h3>
+        <div>
+            <span>結果：</span>
+            {{dt | format("yyyy-MM-dd")}}
+        </div>
+    </div>
+    <script>
+        Vue.filter("format",function(val,arg){
+            var r="";
+            if (arg=="yyyy-MM-dd"){
+                r=val.getFullYear()+"-"+(val.getMonth()+1)+"-"+val.getDate();
+            }
+            return r;
+        });
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                dt:new Date()
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/11.1.png" alt="">
+    <img src="./images/11.2.png" alt="">
+</body>
+</html>
