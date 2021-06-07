@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14.補充知識(陣列相關API)</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        img {
+            display: block;;
+        }
+    </style>
+    <!-- 
+        變異方法和替換陣列有什麼區別
+            1.變異的方法能夠實現資料更新視圖自動更新
+            2.替換陣列不會修改原始資料致資料改變，視圖不一定更新
+        變異方法和替換陣列有哪些
+            1.變異方法
+                push   pop  shift  unshift   splice    sort   reverse
+            2.替換陣列
+                filter   concat    slice 
+    -->
+</head>
+<body>
+    <div id="app">
+        <h3>初始數據</h3>
+        <ul>
+            <li :key="index" v-for="(item,index) in myFruit">{{item}}</li>
+        </ul>
+
+        <h3>新數據</h3>
+        {{myFruit2}}
+        <hr>
+
+        <h3>push</h3>
+        <input type="text" v-model="fruit1">
+        <button v-on:click="push">push</button>
+        <hr>
+
+        <h3>pop</h3>
+        <button v-on:click="pop">pop</button>
+        <hr>
+
+        <h3>shift</h3>
+        <button v-on:click="shift">shift</button>
+        <hr>
+
+        <h3>unshift</h3>
+        <input type="text" v-model="fruit2">
+        <button v-on:click="unshift">unshift</button>
+        <hr>
+
+        <h3>splice</h3>
+        <span>想要刪除的元素index（必選）：</span> <input type="text" v-model.number="spliceP1">
+        <span>想要刪除的個數（必選）：</span> <input type="text" v-model.number="spliceP2">
+        <span>想要在原位置替換的值：</span> <input type="text" v-model.number="spliceP3">
+        <button v-on:click="splice">splice</button>
+        <hr>
+
+        <h3>sort</h3>
+        <button v-on:click="sort">sort</button>
+        <hr>
+
+        <h3>reverse</h3>
+        <button v-on:click="reverse">reverse</button>
+        <hr>
+
+        <h3>reverse</h3>
+        <button v-on:click="filter">filter(inex<=2)</button>
+        <hr>
+
+        <h3>concat</h3>
+        <button v-on:click="concat">concat(grape,peach)</button>
+        <hr>
+
+        <h3>slice</h3><br>
+        起始index：<input type="text" v-model="sliceSIndex">
+        結束index(不包含)：<input type="text" v-model="sliceEIndex">
+        <button v-on:click="slice">slice</button><br>
+        起始index：<input type="text" v-model="sliceSIndex2">
+        <button v-on:click="slice2">slice2</button>
+        <hr>
+        <img src="./images/14.1.png" alt="">
+        <img src="./images/14.2.png" alt="">
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                fruit1:"",
+                fruit2:"",
+                myFruit:["lemon","orange","apple","banana","watermelon"],
+                myFruit2:{},
+                spliceP1:0,
+                spliceP2:2,
+                spliceP3:null,
+                concatFruit:["grape","peach"],
+                sliceSIndex:1,
+                sliceEIndex:3,
+                sliceSIndex2:2,
+            },
+            methods:{
+                push:function(){
+                    
+                    this.myFruit2 = this.myFruit.push(this.fruit1);
+                    console.log(this.myFruit2);
+                },
+                pop:function(){
+                    this.myFruit2 =this.myFruit.pop();
+                },
+                shift:function(){
+                    this.myFruit2 =this.myFruit.shift();
+                },
+                unshift:function(){
+                    this.myFruit2 =this.myFruit.unshift(this.fruit2);
+                },
+                splice:function(){
+                    if (this.spliceP3==null || this.spliceP3=="")
+                        this.myFruit2 =this.myFruit.splice(this.spliceP1,this.spliceP2);
+                    else
+                        this.myFruit2 =this.myFruit.splice(this.spliceP1,this.spliceP2,this.spliceP3);
+                },
+                sort:function(){
+                    this.myFruit2 =this.myFruit.sort();
+                },
+                reverse:function(){
+                    this.myFruit2 =this.myFruit.reverse();
+                },
+                filter:function(){
+                    this.myFruit2 =this.myFruit.filter((item,index)=>{return index<=2;});
+                },
+                concat:function(){
+                    this.myFruit2 =this.myFruit.concat(this.concatFruit);
+                },
+                slice:function(){
+                    this.myFruit2 =this.myFruit.slice(this.sliceSIndex,this.sliceEIndex);
+                },
+                slice2:function(){
+                    this.myFruit2 =this.myFruit.slice(this.sliceSIndex2);
+                },
+            }
+        });
+    </script>
+</body>
+</html>

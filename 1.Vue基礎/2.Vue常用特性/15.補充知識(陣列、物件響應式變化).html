@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>15.補充知識(陣列、物件響應式變化)</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        img {
+            display: block;;
+        }
+    </style>
+    <!-- 
+        如何動態處理回應式資料
+            1.Vue.set(a,b,c)，讓觸發視圖重新更新一遍，資料動態起來 
+            2.a是要更改的陣列或物件名稱、b是陣列的index或物件的屬性、c是更改後的資料 
+    -->
+</head>
+<body>
+    <div id="app">
+        <h3>陣列</h3>
+        <ul>
+            <li :key="index" v-for="(item,index) in fruit">{{item}}</li>
+        </ul>
+
+        <h3>物件</h3>
+        <div>name：{{user.name}}</div>
+        <div>gender：{{user.gender}}</div>
+        <div>age：{{user.age}}</div>
+    </div>
+    
+    <hr>
+    <img src="./images/15.1.png" alt="">
+    <img src="./images/15.2.png" alt="">
+    <img src="./images/15.3.png" alt="">
+    <img src="./images/15.4.png" alt="">
+    <img src="./images/15.5.png" alt="">
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                fruit:['persimmon','pineapple','cantaloupe'],
+                user:{
+                    name:"Robert",
+                    gender:"male",
+                    age:18
+                }
+            }
+        });
+    </script>
+</body>
+</html>

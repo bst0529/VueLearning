@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17.案例-圖書館理-基於數據實現模板效果</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        table {
+            width: 600px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        table thead {
+            background: yellowgreen;
+        }
+        table thead th {
+            border: 1px dashed #333;
+        }
+        table tbody td {
+            border: 1px dashed yellowgreen;
+            text-align: center;
+        }
+        table th,
+        table td {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>編號</th>
+                    <th>名稱</th>
+                    <th>時間</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr :key="item.id" v-for="item in books">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.date}}</td>
+                    <td>
+                        <a href="#" @click.prevent>修改</a>
+                        |
+                        <a href="#" @click.prevent>刪除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                books:[
+                    {
+                        id:1,
+                        name:"三國演義",
+                        date:"2021-06-07"
+                    },
+                    {
+                        id:2,
+                        name:"水滸傳",
+                        date:"2021-06-07"
+                    },
+                    {
+                        id:3,
+                        name:"西遊記",
+                        date:"2021-06-07"
+                    }
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

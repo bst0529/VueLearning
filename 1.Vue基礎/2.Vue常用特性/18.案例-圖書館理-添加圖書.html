@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18.案例-圖書館理-添加圖書</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        table {
+            width: 600px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        table thead {
+            background: yellowgreen;
+        }
+        table thead th {
+            border: 1px dashed #333;
+        }
+        table tbody td {
+            border: 1px dashed yellowgreen;
+            text-align: center;
+        }
+        table th,
+        table td {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4">
+                        <span>編號：</span>
+                        <input type="text" v-model="id" disabled>
+                        <span>名稱：</span>
+                        <input type="text" v-model="name">
+                        <button @click="add">提交</button>
+                    </th>
+                </tr>
+                <tr>
+                    <th>編號</th>
+                    <th>名稱</th>
+                    <th>時間</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr :key="item.id" v-for="item in books">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.date}}</td>
+                    <td>
+                        <a href="#" @click.prevent>修改</a>
+                        |
+                        <a href="#" @click.prevent>刪除</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                id:"",
+                name:"",
+                books:[
+                    {
+                        id:1,
+                        name:"三國演義",
+                        date:"2021-06-07"
+                    },
+                    {
+                        id:2,
+                        name:"水滸傳",
+                        date:"2021-06-07"
+                    },
+                    {
+                        id:3,
+                        name:"西遊記",
+                        date:"2021-06-07"
+                    }
+                ]
+            },
+            methods:{
+                add:function(){
+                    if (this.name.trim().length==0){
+                        alert('請填寫名稱');
+                        return;
+                    }
+                    if (this.books.filter(item=>{return item.name==this.name}).length>0){
+                        alert('名稱已存在');
+                        this.name="";
+                        return;
+                    }
+                    var copy=this.books.slice(0);
+                    this.id=this.books.length>0 ? copy.sort((a,b)=>{return a.id>b.id ? -1 : 1})[0].id+1 : 1;
+                    this.books.push({
+                        id:this.id,
+                        name:this.name,
+                        date:""
+                    });
+                    this.id="";
+                    this.name="";
+                    
+                }
+            }
+        });
+    </script>
+</body>
+</html>

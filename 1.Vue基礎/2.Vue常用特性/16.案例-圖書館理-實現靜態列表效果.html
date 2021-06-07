@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16.案例-圖書館理-實現靜態列表效果</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        table {
+            width: 600px;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        table thead {
+            background: yellowgreen;
+        }
+        table thead th {
+            border: 1px dashed #333;
+        }
+        table tbody td {
+            border: 1px dashed yellowgreen;
+            text-align: center;
+        }
+        table th,
+        table td {
+            padding: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>名稱</th>
+                <th>時間</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>三國演義</td>
+                <td>2021-06-07</td>
+                <td>
+                    <a href="#">修改</a>
+                    |
+                    <a href="#">刪除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>水滸傳</td>
+                <td>2021-06-07</td>
+                <td>
+                    <a href="#">修改</a>
+                    |
+                    <a href="#">刪除</a>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>西遊記</td>
+                <td>2021-06-07</td>
+                <td>
+                    <a href="#">修改</a>
+                    |
+                    <a href="#">刪除</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
