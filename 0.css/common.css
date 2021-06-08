@@ -11,3 +11,9 @@ p {
 .mt-1 {
     margin-top: 10px;
 }
+img {
+    display: block;
+    border: 3px solid #333;
+    padding: 5px;
+    margin-bottom: 5px;
+}
