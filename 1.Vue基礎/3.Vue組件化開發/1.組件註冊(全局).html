@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.組件註冊(全局)</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        * 組件(Component)是Vue.js最強大的功能之一 
+        * 元件可以擴展HTML元素，封裝可重用的代
+
+        全域註冊 
+            Vue.component('組件名稱', { }) 
+                1.第1個參數是標籤名稱
+                2.第2個參數是一個選項物件 
+                3.全局組件註冊後，任何vue實例都可以用
+
+        Vue.component(組件名稱, { 
+            data: 組件資料, 
+            template: 組件範本內容 
+        }) 
+    -->
+</head>
+<body>
+    <div id="app">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+    
+    <script>
+        Vue.component('button-counter',{
+            data:function(){
+                return {
+                    count:0
+                }
+            },
+            template:'<button @click="handel">點擊了{{count}}次</button>',
+            methods:{
+                handel:function(){
+                    this.count++;
+                }
+            }
+        })
+
+        var vm=new Vue({
+            el:"#app",
+            data:{
+               
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/1.1.png" alt="">
+    <img src="./images/1.2.png" alt="">
+</body>
+</html>

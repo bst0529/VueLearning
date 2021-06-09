@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.組件間數據交互(父組件向子組件傳值)</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        父組件如何向子組件傳值
+            1.父組件發送的形式是以屬性的形式綁定值到子組件身上。
+            2.然後子組件用屬性props接收 
+        
+        屬性名稱規則
+            1.在props中使用駝峰形式，
+            2.標籤中需要使用短橫線的形式字
+            3.範本中沒有這個限制
+
+        父組件向子組件傳值-props屬性數值型別
+            1.可以傳遞靜態值
+            2.也可以傳遞動態值
+            3.動態值可以是、字串、數字、布林值、陣列、物件
+            4. v-bind:pboo='true' ==> tpyeof pboo ==> Boolean
+                      pboo='true' ==> tpyeof pboo ==> String              
+    -->
+</head>
+<body>
+    <div id="app">
+        <div>{{msg}}</div>
+        <my-child title="來自父組件的值1" v-bind:ptitle="ptitle" v-bind:content="content"></my-child>
+        <my-child title="來自父組件的值2" v-bind:ptitle="ptitle"></my-child>
+    </div>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                msg:"這是父組件的值",
+                ptitle:"來自父組件的動態值",
+                content:[1,2,3]
+            },
+            components:{
+                'my-child':{
+                    props:['title','ptitle','content'],
+                    data:function(){
+                        return {
+                            msg:"這是子組件的值"
+                        }
+                    },template:"<div>{{msg}}---{{title}}--{{ptitle}}--{{content}}</div>"
+                },
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/5.1.png" alt="">
+    <img src="./images/5.2.png" alt="">
+</body>
+</html>

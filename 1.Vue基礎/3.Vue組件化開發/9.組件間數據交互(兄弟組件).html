@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9.組件間數據交互(兄弟組件)</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        兄弟之間如何通訊
+            1.兄弟之間傳遞資料需要借助於事件中心，通過事件中心傳遞資料
+                * 提供事件中心 var hub = new Vue() 
+            2.傳遞資料方，通過一個事件觸發hub.$emit(方法名，傳遞的資料) 
+            3.接收資料方，通過mounted(){} 鉤子中 觸發hub.$on()方法名 
+            4.銷毀事件 通過hub.$off()方法名銷毀之後無法進行傳遞資料
+    -->
+</head>
+<body>
+    <div id="app">
+        <div>{{pmsg}}</div>
+        <button @click="handel">銷毀事件</button>
+        <item-join></item-join>
+        <item-smith></item-join>
+    </div>
+
+    <script>
+        //提供事件中心
+        var hub=new Vue();
+
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                pmsg:"父組件",
+            },
+            methods:{
+                handel:function(val){
+                    hub.$off("john-event");
+                    hub.$off("smith-event");
+                }
+            },
+            components:{
+                'item-join':{
+                    data:function(){
+                        return {
+                            count:0
+                        }
+                    },
+                    template:`
+                        <div>
+                            <div>John：{{count}}</div>
+                            <div><button @click="handel">點擊</button></div>
+                        </div>
+                    `,
+                    methods:{
+                        handel:function(){
+                            hub.$emit('smith-event',1);
+                        }
+                    },
+                    mounted:function(){
+                     //監聽事件
+                     hub.$on('john-event',(val)=>{
+                        this.count+=1;
+                     });
+                    }
+                },
+                'item-smith':{
+                    data:function(){
+                        return {
+                            count:0
+                        }
+                    },
+                    template:`
+                        <div>
+                            <div>Smith：{{count}}</div>
+                            <div><button @click="handel">點擊</button></div>
+                        </div>
+                    `,
+                    methods:{
+                        handel:function(){
+                            hub.$emit('john-event',2);
+                        }
+                    },
+                    mounted:function(){
+                     //監聽事件
+                     hub.$on('smith-event',(val)=>{
+                        this.count+=1;
+                     });
+                    }
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/9.1.png" alt="">
+    <img src="./images/9.2.png" alt="">
+    <img src="./images/9.3.png" alt="">
+    <img src="./images/9.4.png" alt="">
+    <img src="./images/9.5.png" alt="">
+    <img src="./images/9.6.png" alt="">
+</body>
+</html>

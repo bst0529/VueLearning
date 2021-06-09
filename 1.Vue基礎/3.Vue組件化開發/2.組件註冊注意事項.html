@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.組件註冊注意事項</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        組件注意事項 
+            1.組件參數的data值必須是函數同時這個函數要求返回一個物件(形成閉包)
+            2.組件範本必須是單個根項目
+            3.組件範本的內容可以是模板字符串 
+    -->
+</head>
+<body>
+    <script>
+        Vue.component('button-counter',{
+            data:function(){
+                return {
+                    count:0
+                }
+            },
+            template:'<button @click="handel">點擊了{{count}}次</button><button>測試</botton>',
+            template:'<div><button @click="handel">點擊了{{count}}次</button><button>測試</botton></div>',
+            template:`
+                <div>
+                    <button @click="handel">點擊了{{count}}次</button>
+                    <button>測試</botton>
+                </div>
+            `,
+            methods:{
+                handel:function(){
+                    this.count++;
+                }
+            }
+        })
+
+        var vm=new Vue({
+            el:"#app",
+            data:{
+            
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/2.1.png" alt="">
+    <img src="./images/2.2.png" alt="">
+</body>
+</html>

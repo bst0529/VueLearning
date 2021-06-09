@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10.組件插槽</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        插槽的作用
+            組件的最大特性就是複用性，而用好插槽能大大提高組件的可複用能力
+        插槽的使用
+            1.提供一個插槽的位置
+            2.插槽的內容
+    -->
+</head>
+<body>
+    <div id="app">
+        <!-- 這裡的所有元件標籤中嵌套的內容會替換掉slot，如果不傳值，則使用slot中的預設值 --> 
+        <alert-box>發生錯誤</alert-box>
+        <alert-box>出現bug</alert-box>
+        <alert-box></alert-box>
+    </div>
+
+    <script>
+        Vue.component('alert-box',{
+            template:`
+                <div>
+                    <strong>Error：</strong>
+                    <slot>默認內容</slot>
+                </div>
+            `
+        });
+        var vm=new Vue({
+            el:"#app",
+            data:{}
+        });
+    </script>
+
+    <hr>
+    <img src="./images/10.1.png" alt="">
+</body>
+</html>

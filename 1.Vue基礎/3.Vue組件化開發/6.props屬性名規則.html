@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6.props屬性名規則</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        屬性名稱規則
+            1.在props中使用駝峰形式，
+            2.標籤中需要使用短橫線的形式字
+            3.範本中沒有這個限制
+    -->
+</head>
+<body>
+    <div id="app">
+        <my-child my-title="my-child's Value'"></my-child>
+        <grandson test-title="testTitle's Value"></grandson>
+    </div>
+    <script>
+        Vue.component('grandson',{
+            props:['testTitle'],
+            template:"<div>{{testTitle}}</div>"
+        });
+        var vm = new Vue({
+            el:"#app",
+            data:{},
+            components:{
+                'my-child':{
+                    props:['myTitle'],
+                    template:`
+                        <div>
+                            {{myTitle}}
+                            <grandson testTitle="testTitle's Value"></grandson>
+                            <grandson test-title="testTitle's Value"></grandson>
+                        </div>
+                    `
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/6.1.png" alt="">
+    <img src="./images/6.2.png" alt="">
+</body>
+</html>

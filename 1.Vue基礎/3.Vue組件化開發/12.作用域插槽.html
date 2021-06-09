@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12.作用域插槽</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <style>
+        .current {
+            color: orange;
+        }
+    </style>
+    <!-- 
+        作用域插槽使用場景
+            1.父組件對子組件加工處理
+            2.既可以複用子組件的slot，又可以使slot內容不一致
+        作用域插槽的使用
+            1.子組件範本中,<slot>元素上有一個類似props傳遞資料給元件的寫法msg="xxx
+            2.插槽可以提供一個預設內容，如果如果父元件沒有為這個插槽提供了內容，會顯示預設的內容。 
+              如果父元件為這個插槽提供了內容，則預設的內容會被替換掉
+    -->
+</head>
+<body>
+    <div id="app">
+        <fruit-list :fruits="fruits">
+            <template slot-scope="slotProps">
+                <strong v-if="slotProps.fruit.id==2" class="current">{{slotProps.fruit.name}}</strong>
+                <span v-else>{{slotProps.fruit.name}}</span>
+            </template>
+        </fruit-list>
+    </div>
+
+    <script>
+        Vue.component('fruit-list',{
+            props:['fruits'],
+            template:`
+                <ul>
+                    <li :key="id" v-for="item in fruits">
+                        <slot v-bind:fruit="item">
+                            {{item.name}}    
+                        </slot>    
+                    </li>
+                </ul>
+            `
+        });
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                fruits:[
+                    {
+                        id:1,
+                        name:'apple'
+                    },
+                    {
+                        id:2,
+                        name:'lemon'
+                    },
+                    {
+                        id:3,
+                        name:'banana'
+                    }
+                ]
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/12.1.png" alt="">
+    <img src="./images/12.2.png" alt="">
+</body>
+</html>

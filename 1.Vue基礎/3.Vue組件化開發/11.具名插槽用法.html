@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11.具名插槽用法</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        具名插槽和匿名插槽的區別
+            1.具名插槽有名字
+            2.匿名插槽沒有名字
+        具名插槽用法
+            1.具有名字的插槽 
+            2.使用<slot>中的"name"屬性綁定元素
+            3.通過slot屬性來指定,這個slot的值必須和下面slot元件得name值對應上，如果沒有匹配到，則放到匿名的插槽中
+    -->
+</head>
+<body>
+    <div id="app">
+        <base-laout>
+            <!-- 通過slot屬性來指定, 這個slot的值必須和下面slot元件得name值對應上 -->
+            <p slot="header">標題內容</p>
+            <p>主要內容1</p>
+            <p>主要內容2</p>
+            <p slot="footer">底部內容</p>
+        </base-laout>
+
+        <hr>
+        <base-laout>
+            <!-- 注意點：template臨時的包裹標籤最終不會渲染到頁面上 -->
+            <template slot="header">
+                <p>標題內容1</p>
+                <p>標題內容2</p>
+                <p>標題內容3</p>
+            </template>
+            <template>
+                <p>主要內容1</p>
+                <p>主要內容2</p>
+                <p>主要內容3</p>
+            </template>
+            <template slot="footer">
+                <p>底部內容1</p>
+                <p>底部內容2</p>
+                <p>底部內容3</p>
+            </template>
+        </base-laout>
+    </div>
+
+    <script>
+        Vue.component('base-laout',{
+            template:`
+                <div>
+                    <header>
+                        <slot name='header'></slot>
+                    <header>
+                    <main>
+                        <slot></slot>
+                    </main>
+                    <footer>
+                        <slot name='footer'></slot>
+                    </footer>
+                </div>
+            `
+        });
+        var vm=new Vue({
+            el:"#app",
+            data:{}
+        });
+    </script>
+
+    <hr>
+    <img src="./images/11.1.png" alt="">
+    <img src="./images/11.2.png" alt="">
+    <img src="./images/11.3.png" alt="">
+</body>
+</html>

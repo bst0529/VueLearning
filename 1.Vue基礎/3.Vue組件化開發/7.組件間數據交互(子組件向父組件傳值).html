@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7.組件間數據交互(子組件向父組件傳值)</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+    <!-- 
+        props傳遞資料原則：單向資料流程
+
+        子組件如何向父組件傳遞資料	
+            1.子組件用$emit()觸發事件
+            2.$emit()第一個參數為自訂的事件名稱，第二個參數為需要傳遞的資料
+            3.父組件通過v-on事件監聽監聽子組件傳遞過來的資料 
+    -->
+</head>
+<body>
+    <div id="app">
+        <div :style="{fontSize:fontSize+'px'}">{{pmsg}}</div>
+        <menu-item :fruit="fruit" @enlarge-text="handel"></menu-item>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                pmsg:"父組件內容",
+                fruit:["banana","lemon","applye"],
+                fontSize:10
+            },
+            methods:{
+                handel:function(){
+                    this.fontSize+=5;
+                }
+            },
+            components:{
+                'menu-item':{
+                    props:['fruit'],
+                    template:`
+                        <div>
+                            <li v-for="(item,index) in fruit" :key="index">{{item}}</li>
+                            <button @click='fruit.push("orange")'>添加orange(變成雙向，不建議使用)</button>
+                            <button @click='$emit("enlarge-text")'>擴大父組件中字體大小</button>
+                        </div>
+                    `
+                }
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/7.1.png" alt="">
+    <img src="./images/7.2.png" alt="">
+</body>
+</html>

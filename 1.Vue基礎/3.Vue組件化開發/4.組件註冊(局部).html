@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.組件註冊(局部)</title>
+    <link rel="stylesheet" href="../../0.css/common.css">
+    <script src="../../0.js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 使用局部組件 -->
+        <hellow-world></hellow-world>
+        <hellow-smith></hellow-smith>
+        <hellow-tom></hellow-tom>
+
+    </div>
+    <script>
+        //預先定義組件的模板
+        var hellowWorld={
+            data:function(){
+                return {
+                    msg:"Hellow World"
+                }
+            },
+            template:"<div>{{msg}}</div>"
+        }
+        var hellowSmith={
+            data:function(){
+                return {
+                    msg:"Hellow Smith"
+                }
+            },
+            template:"<div>{{msg}}</div>"
+        }
+        var hellowTom={
+            data:function(){
+                return {
+                    msg:"Hellow Tom"
+                }
+            },
+            template:"<div>{{msg}}</div>"
+        }
+
+        var HelloWorld = {
+            data: function(){
+                return {
+                msg: 'HelloWorld'
+                }
+            },
+            template: '<div>{{msg}}</div>'
+        };
+
+        var vm = new Vue({
+            el:"#app",
+            data:{},
+            //局部組件註冊 
+            //只能在當前註冊它的vue實例中使用
+            components:{
+                'hellow-world':hellowWorld,
+                'hellow-smith':hellowSmith,
+                'hellow-tom':hellowTom,
+            }
+        });
+    </script>
+
+    <hr>
+    <img src="./images/4.1.png" alt="">
+    <img src="./images/4.2.png" alt="">
+    <img src="./images/4.3.png" alt="">
+</body>
+</html>
